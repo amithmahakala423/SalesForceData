@@ -11,10 +11,12 @@ class Rename_Files:
         self.config_parser.read('conf/salesforce_config.ini')
 
     def renamingFiles(self):
-        print ('renaming files')
-        self.download_path = self.config_parser.get('download_path', 'path')
-        os.chdir(self.download_path)
-        os.rename(self.latest_file, self.file_name)
-
+        try:
+            print ('renaming files')
+            self.download_path = self.config_parser.get('download_path', 'path')
+            os.chdir(self.download_path)
+            os.rename(self.latest_file, self.file_name)
+        except Exception as e:
+            print ("Exception orrured in Rename_Files: " + str(e))
 
 
