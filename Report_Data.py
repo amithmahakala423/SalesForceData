@@ -24,16 +24,15 @@ class Report_Data:
             self.nameSuff = self.namePre + str(self.urlNumber)
             print (self.urlSuff)
             while str(self.config_parser.get('salesforce_urls', self.urlSuff)) != '':
+                print ("Working on the report: " + str(self.config_parser.get('file_names', self.nameSuff)))
                 self.driver.get(str(self.config_parser.get('salesforce_urls', self.urlSuff)))
-                print("Opening page......")
                 time.sleep(2);
                 self.button = self.driver.find_element_by_name('csvsetup')
                 self.button.click()
-                print ("Clicked Export Details Button")
                 time.sleep(2)
                 self.button = self.driver.find_element_by_name('export')
                 self.button.click()
-                print("Clicked Export Button..file ready to download")
+                print("file ready to download: "+ str(self.config_parser.get('file_names', self.nameSuff)))
                 time.sleep(5)
                 self.findfile = Find_Files(str(self.config_parser.get('file_names', self.nameSuff)), self.config_parser)
                 self.findfile.findFile()
